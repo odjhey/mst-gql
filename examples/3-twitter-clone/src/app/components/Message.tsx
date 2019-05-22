@@ -12,12 +12,7 @@ export const Message = observer(
           <h4>{message.user.name}</h4>
           <p>{message.text}</p>
           <div className="buttons">
-            <div
-              className={message.isLikedByMe ? "like liked" : "like"}
-              onClick={message.like}
-            >
-              💙
-            </div>
+            <div className={"like"}>💙</div>
           </div>
         </div>
       </li>

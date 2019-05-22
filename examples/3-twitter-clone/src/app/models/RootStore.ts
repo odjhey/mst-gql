@@ -7,7 +7,6 @@ import { selectFromMessage } from "./MessageModel.base"
 export const MESSAGE_FRAGMENT = selectFromMessage()
   .timestamp
   .text
-  .likes().close()
   .user().name.avatar.close()
   .build()
 

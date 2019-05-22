@@ -8,7 +8,6 @@ type Message {
   timestamp: Float!
   user: User!
   text: String!
-  likes: [User!]
   replyTo: Message
 }
 type Query {
@@ -21,6 +20,5 @@ type Subscription {
 }
 type Mutation {
   changeName(id: ID!, name: String!): User
-  like(msg: ID!, user: ID!): Message
   postTweet(text: String!, user: ID!, replyTo: ID): Message
 }
