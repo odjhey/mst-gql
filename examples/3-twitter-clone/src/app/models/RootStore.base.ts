@@ -37,11 +37,6 @@ export const RootStoreBase = MSTGQLStore
         ${resultSelector}
       } }`, variables, optimisticUpdate)
     },
-    mutateLike(variables: { msg: string, user: string }, resultSelector = messageModelPrimitives, optimisticUpdate?: () => void) {
-      return self.mutate<typeof MessageModel.Type>(`mutation like($msg: ID!, $user: ID!) { like(msg: $msg, user: $user) {
-        ${resultSelector}
-      } }`, variables, optimisticUpdate)
-    },
     mutatePostTweet(variables: { text: string, user: string, replyTo: string | undefined }, resultSelector = messageModelPrimitives, optimisticUpdate?: () => void) {
       return self.mutate<typeof MessageModel.Type>(`mutation postTweet($text: String!, $user: ID!, $replyTo: ID) { postTweet(text: $text, user: $user, replyTo: $replyTo) {
         ${resultSelector}

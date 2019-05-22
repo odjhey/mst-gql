@@ -9,7 +9,7 @@ import { MessageModelType } from "../models"
 
 export const Replies = ({ message }: { message: MessageModelType }) => (
   <div className="replies">
-    <Query<MessageModelType[]> query={() => message.loadReplies()}>
+    <Query<MessageModelType[]>>
       {({ data, error, loading }) => {
         if (error) return <Error>{error}</Error>
         if (loading) return <Loading />

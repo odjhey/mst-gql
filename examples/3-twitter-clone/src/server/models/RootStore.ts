@@ -105,14 +105,19 @@ export const RootStore = RootStoreBase.views(self => {
       })
       return m.serialize()
     },
-    like(msgId, userId) {
+    async like(msgId, userId) {
       const user = resolveIdentifier(UserModel, self, userId)
       const msg = resolveIdentifier(MessageModel, self, msgId)
       if (!user || !msg) throw new Error("Invalid message or user!")
       if (msg.likes.includes(user)) msg.likes.remove(user)
       else msg.likes.push(user)
       saveToDB()
+      await sleep(2000)
       return msg.serialize()
     }
   }
 })
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}
