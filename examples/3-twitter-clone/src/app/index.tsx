@@ -11,9 +11,9 @@ import { StoreContext } from "./models/reactUtils"
 import { Home } from "./components/Home"
 import { Profile } from "./components/Profile"
 
-const gqlHttpClient = createHttpClient("http://localhost:4000/graphql")
+const gqlHttpClient = createHttpClient("http://localhost:4002/graphql")
 
-const gqlWsClient = new SubscriptionClient("ws://localhost:4001/graphql", {
+const gqlWsClient = new SubscriptionClient("ws://localhost:4003/graphql", {
   reconnect: true
 })
 

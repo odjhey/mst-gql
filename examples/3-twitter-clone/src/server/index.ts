@@ -8,8 +8,8 @@ import express from "express"
 
 import { typeDefs, resolvers } from "./schema"
 
-const PORT = 4000
-const WS_PORT = 4001
+const PORT = 4002
+const WS_PORT = 4003
 
 // Setup websocket server
 const websocketServer = createServer((request, response) => {
