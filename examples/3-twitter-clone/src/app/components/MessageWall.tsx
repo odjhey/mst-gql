@@ -12,14 +12,7 @@ export const MessageWall = observer(() => {
         count: 3,
         replyTo: undefined
       },
-      `__typename
-      id
-      text
-      user { 
-        __typename
-        id
-        name 
-      }`
+      m => m.text.timestamp.user().name.avatar.close()
     )
   )
 
@@ -29,7 +22,7 @@ export const MessageWall = observer(() => {
     <ul>
       {data.map(message => (
         <li>
-          {message.user.name}: {message.text}
+          <b>{message.user.name}</b>: {message.text}
           <hr />
         </li>
       ))}
