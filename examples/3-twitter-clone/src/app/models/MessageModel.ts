@@ -9,4 +9,22 @@ export { messageModelPrimitives } from "./MessageModel.base"
 /**
  * MessageModel
  */
-export const MessageModel = MessageModelBase
+export const MessageModel = MessageModelBase.views(self => ({
+  get isLikedByMe() {
+    return self.likes.includes(self.store.me)
+  }
+})).actions(self => ({
+  like() {
+    return self.store.mutateLike(
+      {
+        msg: self.id,
+        user: self.store.me.id
+      },
+      `__typename id likes { __typename id }`,
+      () => {
+        if (self.isLikedByMe) self.likes.remove(self.store.me)
+        else self.likes.push(self.store.me)
+      }
+    )
+  }
+}))
