@@ -711,3 +711,5 @@ more in depth example TODO: create diff branch / MR link with the changes
 - [ ] generate generation data + mst-sql version into file headers
 - [ ] Lerna for simpler repo setup
 - [ ] add support for identifier attributes not called \_id
+- [ ] detect superfluous files in the models directory
+- [ ] drop Query component in favor of hook
