@@ -514,7 +514,7 @@ ${optPrefix("\n    // ", sanitizeComment(description))}
     const contents = `\
 ${header}
 
-import { createStoreContext, createQueryComponent } from "mst-gql"
+import { createStoreContext, createQueryComponent, createUseQueryHook } from "mst-gql"
 import { RootStore } from "./RootStore${importPostFix}"
 
 export const StoreContext = createStoreContext${
@@ -522,6 +522,8 @@ export const StoreContext = createStoreContext${
     }()
 
 export const Query = createQueryComponent(StoreContext)
+
+export const useQuery = createUseQueryHook(StoreContext)
 `
 
     generateFile("reactUtils", contents, true)
