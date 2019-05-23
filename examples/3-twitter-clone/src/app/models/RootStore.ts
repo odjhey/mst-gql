@@ -2,6 +2,7 @@ import { RootStoreBase } from "./RootStore.base"
 import { types } from "mobx-state-tree"
 import { MessageModel } from "./MessageModel"
 import { selectFromMessage } from "./MessageModel.base"
+import { localStorageMixin } from "mst-gql"
 
 // prettier-ignore
 export const MESSAGE_FRAGMENT = selectFromMessage()
