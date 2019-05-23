@@ -22,6 +22,7 @@ export const MessageModelBase = MSTGQLObject
     timestamp: types.maybe(types.number),
     user: types.maybe(MSTGQLRef(types.late(() => UserModel))),
     text: types.maybe(types.string),
+    likes: types.optional(types.array(MSTGQLRef(types.late(() => UserModel))), []),
     replyTo: types.maybe(MSTGQLRef(types.late((): any => MessageModel))),
   })
   .views(self => ({
@@ -30,19 +31,18 @@ export const MessageModelBase = MSTGQLObject
     }
   }))
 
-export class MessageModelSelector<PARENT=unknown> extends QueryBuilder<PARENT> {
+export class MessageModelSelector extends QueryBuilder {
   get id() { return this.__attr(`id`) }
   get timestamp() { return this.__attr(`timestamp`) }
   get text() { return this.__attr(`text`) }
-  user(): UserModelSelector<this> { return this.__child(`user`, UserModelSelector) as any }
-  get userRef() { return this.__ref(`user`, UserModelSelector) }
-  replyTo(): MessageModelSelector<this> { return this.__child(`replyTo`, MessageModelSelector) as any }
-  get replyToRef() { return this.__ref(`replyTo`, MessageModelSelector) }
+  user(builder?: string | ((user: UserModelSelector) => UserModelSelector)) { return this.__child(`user`, UserModelSelector, builder) }
+  likes(builder?: string | ((user: UserModelSelector) => UserModelSelector)) { return this.__child(`likes`, UserModelSelector, builder) }
+  replyTo(builder?: string | ((message: MessageModelSelector) => MessageModelSelector)) { return this.__child(`replyTo`, MessageModelSelector, builder) }
 }
 
 export function selectFromMessage() {
   return new MessageModelSelector()
 }
 
-export const messageModelPrimitives = selectFromMessage().id.timestamp.text.build()
+export const messageModelPrimitives = selectFromMessage().id.timestamp.text.toString()
 

@@ -26,7 +26,7 @@ export const UserModelBase = MSTGQLObject
     }
   }))
 
-export class UserModelSelector<PARENT=unknown> extends QueryBuilder<PARENT> {
+export class UserModelSelector extends QueryBuilder {
   get id() { return this.__attr(`id`) }
   get name() { return this.__attr(`name`) }
   get avatar() { return this.__attr(`avatar`) }
@@ -37,5 +37,5 @@ export function selectFromUser() {
   return new UserModelSelector()
 }
 
-export const userModelPrimitives = selectFromUser().id.name.avatar.build()
+export const userModelPrimitives = selectFromUser().id.name.avatar.toString()
 

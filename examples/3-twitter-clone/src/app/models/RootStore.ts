@@ -7,8 +7,8 @@ import { selectFromMessage } from "./MessageModel.base"
 export const MESSAGE_FRAGMENT = selectFromMessage()
   .timestamp
   .text
-  .user().name.avatar.close()
-  .build()
+  .user(user => user.name.avatar)
+  .toString()
 
 export type RootStoreType = typeof RootStore.Type
 

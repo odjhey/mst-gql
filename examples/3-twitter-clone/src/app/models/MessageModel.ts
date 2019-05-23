@@ -20,7 +20,7 @@ export const MessageModel = MessageModelBase.views(self => ({
         msg: self.id,
         user: self.store.me.id
       },
-      q => q.likesRef,
+      msg => msg.likes(),
       () => {
         if (self.isLikedByMe) self.likes.remove(self.store.me)
         else self.likes.push(self.store.me)
