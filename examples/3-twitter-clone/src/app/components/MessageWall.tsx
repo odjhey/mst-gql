@@ -12,7 +12,7 @@ export const MessageWall = observer(() => {
         count: 3,
         replyTo: undefined
       },
-      m => m.text.timestamp.user().name.avatar.close()
+      m => m.text.timestamp.user(u => u.name.avatar)
     )
   )
 
