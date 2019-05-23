@@ -301,20 +301,18 @@ ${generateFragments()}
     function generateFragments() {
       if (modelsOnly) return ""
       return `\
-export class ${name}ModelSelector${ifTS(
-        "<PARENT=unknown>"
-      )} extends QueryBuilder${ifTS("<PARENT>")} {
+export class ${name}ModelSelector extends QueryBuilder {
 ${primitiveFields
   .map(p => `  get ${p}() { return this.__attr(\`${p}\`) }`)
   .join("\n")}
 ${nonPrimitiveFields
   .map(
     ([field, type]) =>
-      `  ${field}()${ifTS(
-        `: ${type}ModelSelector<this>`
-      )} { return this.__child(\`${field}\`, ${type}ModelSelector)${ifTS(
-        " as any"
-      )} }\n  get ${field}Ref() { return this.__ref(\`${field}\`, ${type}ModelSelector) }`
+      `  ${field}(builder?: ${ifTS(
+        `string | ((${toFirstLower(
+          type
+        )}: ${type}ModelSelector) => ${type}ModelSelector))`
+      )} { return this.__child(\`${field}\`, ${type}ModelSelector, builder) }`
   )
   .join("\n")}
 }
@@ -325,7 +323,7 @@ export function selectFrom${name}() {
 
 export const ${flowerName}ModelPrimitives = selectFrom${name}()${primitiveFields
         .map(p => `.${p}`)
-        .join("")}.build()
+        .join("")}.toString()
 `
     }
   }
@@ -488,7 +486,7 @@ ${optPrefix("\n    // ", sanitizeComment(description))}
       return self.${methodPrefix}${tsType}(\`${gqlPrefix} ${name}${formalArgs} { ${name}${actualArgs} {
         \${typeof resultSelector === "function" ? resultSelector(new ${
           returnType.name
-        }ModelSelector()).build() : resultSelector}
+        }ModelSelector()).toString() : resultSelector}
       } }\`, variables${extraActualArgs})
     },`
       })
