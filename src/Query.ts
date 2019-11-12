@@ -114,13 +114,18 @@ export class Query<T = unknown> implements PromiseLike<T> {
       promise = this.store.rawRequest(this.query, this.variables)
       this.store.__pushPromise(promise, this.queryKey)
     }
-    promise = promise.then((data: any) => {
-      // cache query and response
-      if (this.fetchPolicy !== "no-cache") {
-        this.store.__cacheResponse(this.queryKey, this.store.deflate(data))
-      }
-      return this.store.merge(data)
-    })
+    promise = promise
+      .then((data: any) => {
+        // cache query and response
+        if (this.fetchPolicy !== "no-cache") {
+          this.store.__cacheResponse(this.queryKey, this.store.deflate(data))
+        }
+        return this.store.merge(data)
+      })
+      .catch(error => {
+        this.loading = false
+        this.error = error
+      })
     this.promise = promise
     promise.then(
       action((data: any) => {
