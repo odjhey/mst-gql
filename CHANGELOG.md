@@ -1,5 +1,47 @@
 # CHANGELOG
 
+## 0.12.0
+
+- Suppot for non-object return values. These currently are not stored in the store automatically. [#246](https://github.com/mobxjs/mst-gql/pull/246)
+- Add `Type` suffix to MST enum types to avoid clash with typescript value [#238](https://github.com/mobxjs/mst-gql/pull/238) - [beepsoft](https://github.com/beepsoft)
+
+## 0.11.1
+
+- Reset query error after successful query [#231](https://github.com/mobxjs/mst-gql/pull/231) - [reekris](https://github.com/reekris)
+- Add typescript enums for actions [#233](https://github.com/mobxjs/mst-gql/pull/233) - [special-character](https://github.com/special-character)
+
+## 0.11.0
+
+- Adds support for --header flag to CLI. [#209](https://github.com/mobxjs/mst-gql/pull/209) - [mwarger](https://github.com/mwarger)
+- Update `localStorageMixin` to prevent stale local data. [#225](https://github.com/mobxjs/mst-gql/pull/225) - [special-character](https://github.com/special-character)
+
+## 0.9.0 / 0.10.0
+
+- Enum's no longer get Model added to their name. This is a small breaking change from 0.8.0.
+
+#### **⚠️ Note**
+
+mst-gql now generates model names matching JS conventions by default. If you are upgrading from a pre-0.8.0 release this may result in different names being geneated when you scaffold. If you don't wish to update your names or want to wait, use the new `--dontRenameModels` option to keep your current model names.
+
+## 0.8.0
+
+- Allow LIST to be optional in TS. [174](https://github.com/mobxjs/mst-gql/pull/174) - [Aryk](https://github.com/Aryk)
+- Generate model names that match JS conventions by default, add escape hatch option to opt-out - [155](https://github.com/mobxjs/mst-gql/pull/155) - [beepsoft](https://github.com/beepsoft)
+- Better error handling around reserved model names. [192](https://github.com/mobxjs/mst-gql/pull/192) - [Matth10](https://github.com/Matth10)
+- Remove example project `yarn.lock` files to reduce the "github auto PR" noise.
+
+#### **⚠️ Note**
+
+mst-gql now generates model names matching JS conventions by default. If you are upgrading from a pre-0.8.0 release this may result in different names being geneated when you scaffold. If you don't wish to update your names or want to wait, use the new `--dontRenameModels` option to keep your current model names.
+
+## 0.7.1
+
+- update how optional types are generated. [150](https://github.com/mobxjs/mst-gql/pull/150)
+
+## 0.7.0
+
+- 🎉 add new code to fix circular ref issues in typescript code. [#140](https://github.com/mobxjs/mst-gql/pull/140) - [godness84](https://github.com/godness84)
+
 ## 0.6.0
 
 - add a new `ModelBase` file that all models extend that can be edited. [#106](https://github.com/mobxjs/mst-gql/pull/106) - [zenflow](https://github.com/zenflow)
